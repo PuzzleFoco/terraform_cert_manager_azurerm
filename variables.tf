@@ -39,7 +39,7 @@ variable "lets_encrypt_email" {
   type = string
 }
 
-variable "resources" {
-  description = "The allocated resources for the module"
-  type        = any
-}
+// variable "resources" {
+//   description = "The allocated resources for the module"
+//   type        = any
+// }

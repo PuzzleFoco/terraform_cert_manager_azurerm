@@ -58,8 +58,6 @@ resource "helm_release" "cert-manager" {
   chart      = "cert-manager"
   version    = "${local.certManagerHelmVersion}"
 
-  values = ["${local.values_yaml_rendered}"]
-
   depends_on = ["kubernetes_namespace.cert_manager"]
 }
 

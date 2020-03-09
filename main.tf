@@ -54,6 +54,7 @@ data "helm_repository" "jetstack" {
 // Install cert-manager via helm in namespace cert-manager
 resource "helm_release" "cert-manager" {
   name       = "cert-manager"
+  namespace  = kubernetes_namespace.cert_manager.metadata[0].name
   repository = "${data.helm_repository.jetstack.name}"
   chart      = "cert-manager"
   version    = "${local.certManagerHelmVersion}"

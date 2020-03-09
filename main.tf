@@ -84,7 +84,7 @@ data "template_file" "cert_manager_manifest" {
     NAMESPACE                  = "${kubernetes_namespace.cert_manager.metadata.0.name}"
     AZURE_SUBSCRIPTION_ID      = "${var.subscription_id}"
     AZURE_TENANT_ID            = "${var.tenant_id}"
-    AZURE_RESOURCE_GROUP       = "${var.node_resource_group}"
+    AZURE_RESOURCE_GROUP       = "${var.dns_zone_resource_group}"
     AZURE_DNS_ZONE_NAME        = "${var.root_domain}"
     CERT_NAME                  = "wildcard"
     PASSWORD                   = "password"

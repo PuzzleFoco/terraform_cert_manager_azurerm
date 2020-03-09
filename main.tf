@@ -13,9 +13,9 @@ locals {
   customResourceDefinition = "0.10"
   certManagerHelmVersion   = "v0.10.0"
 
-  values_yaml_rendered = templatefile("./${path.module}/values.yaml.tpl", {
-    resources = "${var.resources}"
-  })
+  // values_yaml_rendered = templatefile("./${path.module}/values.yaml.tpl", {
+  //   resources = "${var.resources}"
+  // })
 }
 
 // ensures that the right kubeconfig is used local

@@ -1,14 +1,4 @@
-############################################################################
-# Created Date: 08.10.2019                                                 #
-# Author: Fabius Engel (fabius.engel@msg.group)                            #
-# -----                                                                    #
-# Last Modified: 30.10.2019 10:41:14                                       #
-# Modified By: Michael Süssemilch (michael.suessemilch@msg.group)          #
-# -----                                                                    #
-# Copyright (c) 2019 msg nexinsure ag                                      #
-############################################################################
-
-apiVersion: certmanager.k8s.io/v1alpha1
+apiVersion: cert-manager.io/v1alpha2
 kind: ClusterIssuer
 metadata:
   name: letsencrypt
@@ -20,11 +10,9 @@ spec:
     # server: https://acme-staging-v02.api.letsencrypt.org/directory #This is the staging Server from let's encrypt use it when trying things out
     privateKeySecretRef:
       name: letsencrypt
-    dns01:
-      providers:
-      - name: azure-dns
+    solvers:
+    - dns01:
         azuredns:
-          email: ${EMAIL}
           # Service principal clientId (also called appId)
           clientID: ${AZURE_SERVICE_PRINCIPAL_ID}
           clientSecretSecretRef:
@@ -39,7 +27,7 @@ spec:
           # Name of the DNS Zone
           hostedZoneName: ${DOMAIN}
 ---
-apiVersion: certmanager.k8s.io/v1alpha1
+apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
 metadata:
   name: ${CERT_NAME}
@@ -52,11 +40,4 @@ spec:
   commonName: '*.${DOMAIN}' 
   dnsNames:
   - ${DOMAIN}
-  acme:
-    config:
-    - dns01:
-        provider: azure-dns
-        ingressClass: nginx
-      domains:
-      - '*.${DOMAIN}'
-      - ${DOMAIN}
+  - '*.${DOMAIN}'

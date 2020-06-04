@@ -66,7 +66,7 @@ resource "helm_release" "cert-manager" {
 resource "kubernetes_secret" "cert-manager-secret" {
   metadata {
     name      = "secret-azure-config"
-    namespace = "${kubernetes_namespace.cert_manager.metadata.0.name}"
+    namespace = kubernetes_namespace.cert_manager.metadata.0.name
   }
   data = {
     password = "${var.client_secret}"

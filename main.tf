@@ -25,13 +25,6 @@ resource "null_resource" "get_kubectl" {
   }
 }
 
-// Creates Namespace for cert-manager. necessary to disable resource validation
-resource "kubernetes_namespace" "cert_manager" {
-  metadata {
-    name = "cert-manager"
-  }
-}
-
 // Install the CustomResourceDefinition resources separately (requiered for Cert-Manager) 
 resource "null_resource" "install_crds" {
   provisioner "local-exec" {
@@ -42,7 +35,15 @@ resource "null_resource" "install_crds" {
     when    = destroy
     command = "kubectl --context ${var.cluster_name} delete -f https://github.com/jetstack/cert-manager/releases/download/${local.customResourceDefinition}/cert-manager.crds.yaml"
   }
-  depends_on = [null_resource.get_kubectl, kubernetes_namespace.cert_manager]
+  depends_on = [null_resource.get_kubectl]
+}
+
+// Creates Namespace for cert-manager. necessary to disable resource validation
+resource "kubernetes_namespace" "cert_manager" {
+  metadata {
+    name = "cert-manager"
+  }
+  depends_on  = [null_resource.install_crds]
 }
 
 // Adds jetsteck to helm repo

@@ -12,10 +12,6 @@ terraform {
 locals {
   customResourceDefinition = "v0.15.0"
   certManagerHelmVersion   = "v0.15.0"
-
-  // values_yaml_rendered = templatefile("./${path.module}/values.yaml.tpl", {
-  //   resources = "${var.resources}"
-  // })
 }
 
 // ensures that the right kubeconfig is used local

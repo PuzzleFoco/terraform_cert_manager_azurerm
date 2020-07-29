@@ -1,13 +1,3 @@
-############################################################################
-# Created Date: 08.10.2019                                                 #
-# Author: Fabius Engel (fabius.engel@msg.group)                            #
-# -----                                                                    #
-# Last Modified: 23.10.2019 09:29:46                                       #
-# Modified By: Michael Süssemilch (michael.suessemilch@msg.group)          #
-# -----                                                                    #
-# Copyright (c) 2019 msg nexinsure ag                                      #
-############################################################################
-
 variable "subscription_id" {}
 
 variable "client_id" {}
@@ -38,8 +28,3 @@ variable "dns_zone_resource_group" {
 variable "lets_encrypt_email" {
   type = string
 }
-
-// variable "resources" {
-//   description = "The allocated resources for the module"
-//   type        = any
-// }
